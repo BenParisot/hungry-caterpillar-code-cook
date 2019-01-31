@@ -1,6 +1,6 @@
-//get color-button node
+//get DOM nodes (color-button, canvas) 
 const colorButtonsNode = document.getElementById('color-buttons');
-
+const canvasNode = document.getElementById('canvas');
 
 //create array of colors
 const colors = [
@@ -26,7 +26,24 @@ for(let index = 0; index < colors.length; index++) {
 
     colorButton.addEventListener('click', function() {
         console.log(colorButton.value + ' was clicked!');
+
+        paint(color);
     }); //waits for the buttons to be clicked to call this function and do something
 
     colorButtonsNode.appendChild(colorButton); //adds each new button created in loop to the parent node of colorButtonNode we defined first in script
+
+
 }
+
+//create function that paints squares of color (new elements) in canvas
+
+function paint(color) {
+    const colorBlock = document.createElement('span');
+    colorBlock.classList.add(color);
+    colorBlock.classList.add('color-block');
+    canvasNode.appendChild(colorBlock);
+
+    console.log(colorBlock);
+
+}
+
