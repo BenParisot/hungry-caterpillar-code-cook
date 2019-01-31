@@ -1,6 +1,7 @@
 //get DOM nodes (color-button, canvas) 
 const colorButtonsNode = document.getElementById('color-buttons');
 const canvasNode = document.getElementById('canvas');
+const transformButtonsNode = document.getElementById('transform-buttons');
 
 //create array of colors
 const colors = [
@@ -9,7 +10,6 @@ const colors = [
     'red',
     'yellow'
 ];
-
 
 
 //create button elements
@@ -25,8 +25,6 @@ for(let index = 0; index < colors.length; index++) {
     colorButton.id = color; //creates new id attribute in button tag for each color in loop
 
     colorButton.addEventListener('click', function() {
-        console.log(colorButton.value + ' was clicked!');
-
         paint(color);
     }); //waits for the buttons to be clicked to call this function and do something
 
@@ -37,13 +35,38 @@ for(let index = 0; index < colors.length; index++) {
 
 //create function that paints squares of color (new elements) in canvas
 
+
+
+//loop that generates buttons to transform color blocks into circles
+for(let index = 0; index < colors.length; index++) {
+    let color = colors[index]; 
+    const transformButton = document.createElement('button'); 
+    transformButton.textContent = color; 
+    transformButton.value = color; 
+    transformButton.classList.add('transform-button'); 
+    transformButton.id = color; 
+
+    transformButton.addEventListener('click', function() {
+        transform(color);
+    }); 
+
+    transformButtonsNode.appendChild(transformButton); 
+}
+
 function paint(color) {
     const colorBlock = document.createElement('span');
     colorBlock.classList.add(color);
     colorBlock.classList.add('color-block');
     canvasNode.appendChild(colorBlock);
+}
 
-    console.log(colorBlock);
+function transform(color) {
+    const selector = '.color-block.' + color;
+    const colorBlocks = document.querySelectorAll(selector);
+    console.log(colorBlocks);
 
+    for(let index = 0; index < colorBlocks.length; index++) {
+        colorBlocks[index].classList.add('transform');
+    }
 }
 
